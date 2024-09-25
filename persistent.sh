@@ -1,4 +1,4 @@
-#!/bin/sh /etc/init.d/
+#!/bin/sh /etc/rc.local
 
 # Run after Boot
 opkg install wget iptables-mod-ipopt iptables-zz-legacy -y
