@@ -1,7 +1,12 @@
 # Bypassed any Wireless AP with TTL=1 using any Router with OpenWRT installed.
 
+### Notes
 - Required Internet for installation.
 - Tested on 2.4Ghz openwrt router and not in 2.4G/5G dual band openwrt router..
+
+### How it works?
+- WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> 10.0.0.1 TTL/HL=64
+
 
 ### Auto install
 
