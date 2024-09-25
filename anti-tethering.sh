@@ -1,7 +1,12 @@
 #!/bin/sh /etc/init.d/
-# Set Target Interfaces
+
+# Setup
+# WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> 10.0.0.1 TTL/HL=64
+
+# Interfaces 
 LAN="eth0"
 WAN="wlan0"
+
 # Flush Tables
 iptables -F
 iptables -t nat -F -t mangle -F
