@@ -1,10 +1,11 @@
-# Bypassed any Wireless AP with TTL=1 using any Router with OpenWRT installed.
-## [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html) Overview.
-### Notes
-- Required Internet for installation.
-- Tested on 2.4Ghz openwrt router and not in 2.4G/5G dual band openwrt router..
+# Bypassed Wireless AP Anti-Tethering using any Router with OpenWRT installed.
 
-### How it works?
+## [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html) Overview.
+
+### Notes
+- Requires Internet for installation.
+
+### How it works on WISP mode?
 - WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> 10.0.0.1 TTL/HL=64
 
 
