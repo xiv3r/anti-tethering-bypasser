@@ -5,4 +5,6 @@
 
 ### Auto install
 
-    wget https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
+    opkg install curl
+
+    curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
