@@ -1,5 +1,5 @@
 #!/bin/sh /etc/init.d/
-
+# Set Target Interfaces
 LAN="eth0"
 WAN="wlan0"
 # Flush Tables
