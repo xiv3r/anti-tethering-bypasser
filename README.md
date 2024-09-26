@@ -20,4 +20,8 @@
 
       opkg update ; opkg upgrade -y ; opkg install curl -y ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
 
+### Fixed DNS Issue
+- Goto Network => Interface => wwan => Advanced Settings
+  * Custom DNS Server => 8.8.8.8
+  * DNS Search Domain => dns.google
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Without TTL %26 With TTL.png">
