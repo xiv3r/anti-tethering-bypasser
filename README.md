@@ -25,7 +25,7 @@
 ### Auto install
    * persistent
    
-    opkg update ; opkg install curl -y ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
+    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
 
 ### To check
    * `iptables -L -n -v --line-numbers`
