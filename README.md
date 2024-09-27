@@ -11,8 +11,10 @@
    
 ### How to do it?
    - First connect the lan cable into the router wan port.
+   - Connect your phone via wifi or pc to lan.
    - Execute `SSH` or `TELNET` using `putty`•`termius`•`termux`•`juicessh`•`kali` and then proceed to auto install.
-   
+     * sudo apt update ; apt install ssh openssh-server telnet puty -y
+
     ssh root@192.168.1.1
   
    <br>
