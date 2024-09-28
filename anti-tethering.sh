@@ -2,6 +2,9 @@
 
 # WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> 10.0.0.1 TTL/HL=64
 
+# Flush table
+iptables -F
+
 # Flush NAT table rules
 iptables -t nat -F
 
@@ -13,8 +16,7 @@ iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 iptables -t mangle -I POSTROUTING -o wlan0 -j TTL --ttl-set 64
 
 # Redirect all traffic from wlan0 to eth0
-iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 
 exit 0
