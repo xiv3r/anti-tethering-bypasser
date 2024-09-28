@@ -1,4 +1,4 @@
-# Bypassed Wireless Access Point with Anti-Tethering enabled using any Router with OpenWRT installed.
+JJ# Bypassed Wireless Access Point with Anti-Tethering enabled using any Router with OpenWRT installed.
 
 ### [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html) Overview.
 
@@ -28,7 +28,7 @@
 ### Auto install
    * persistent
    
-    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh persistent.sh
+    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh
 
 ### How To check?
    * `iptables -L -n -v --line-numbers`
