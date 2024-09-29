@@ -2,9 +2,6 @@
 
 # WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> LAN/WLAN=>10.0.0.1 TTL/HL=64
 
-# Flush table
-iptables -F
-
 # Flush mangle table rules
 iptables -t mangle -F
 
