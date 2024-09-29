@@ -10,7 +10,6 @@ iptables -t mangle -F
 
 # Input TTL=1 and Output TTL=64
 iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
-iptables -t mangle -I POSTROUTING -o wlan0 -j TTL --ttl-set 64
 
 # Redirect all traffic from wlan0 to eth0
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
