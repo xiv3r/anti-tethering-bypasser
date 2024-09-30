@@ -4,8 +4,10 @@
 
 # Flush mangle table rules
 iptables -F
+iptables -t mangle -F
 
-# Append ttl before prerouting (TTL=1 and Output TTL=64)
+# Append ttl in both  prerouting and postrouting (TTL=1 and Output TTL=64)
+iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
 iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
 
 # Redirect all traffic from wlan0 to eth0
