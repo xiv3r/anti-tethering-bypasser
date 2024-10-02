@@ -14,7 +14,7 @@ ip6tables -t mangle -F
 ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64
 ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
 ip6tables -A FORWARD -i wlan0 -o br-lan -j ACCEPT
-ip6tables -A FORWARD -i br-lan -o br-lan -j ACCEPT
+ip6tables -A FORWARD -i br-lan -o wlan0 -j ACCEPT
 ip6tables -P FORWARD ACCEPT
 
 exit 0
