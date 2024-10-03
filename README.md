@@ -12,7 +12,7 @@
 ### How to do it?
    - First connect the lan cable into the router wan port.
    - Connect your phone via wifi or pc to lan.
-   - Execute `SSH` or `TELNET` using `putty`•`termius`•`termux`•`juicessh`•`kali` and then proceed to auto install.
+   - Execute `SSH` or `TELNET` using `Putty`•`Termius`•`Termux`•`JuiceSSH`•`Kali/Ubuntu` and then proceed to auto install.
      * sudo apt update ; apt install ssh openssh-server telnet puty -y
 
     ssh root@192.168.1.1
@@ -26,12 +26,14 @@
     
      
 ### Auto install
-   * persistent
+   * Persistent /etc/rc.local
    
     opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/persistent.sh | sh
 
 ### How To check?
-   * `iptables -L -n -v --line-numbers`
-   * `iptables -t nat -L --line-numbers`
-   * 
+   
+   * `iptables -vnL --line-numbers`
+   * `ip6tables -vnL --line-numbers`
+   * `iptables -vnL --line-numbers ; ip6tables -vnL --line-numbers`
+     
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Without TTL %26 With TTL.png">
