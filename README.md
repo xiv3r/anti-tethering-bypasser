@@ -32,7 +32,7 @@
 ### Auto install
    * Persistent /etc/rc.local
    
-    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh >> install ; sh install
+    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh
 
 ### How To check?
    
