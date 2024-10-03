@@ -1,5 +1,6 @@
 opkg install wget iptables-mod-ipopt kmod-ipt-ipopt kmod-ipt-nat iptables-zz-legacy iptables ip6tables ip6tables-zz-legacy ip6tables-mod-nat kmod-ipt-nat6 kmod-ip6tables kmod-zram
 
+echo "" > /etc/rc.local
 echo "#!/bin/sh /etc/rc.local" >> /etc/rc.local
 echo "# WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> LAN/WLAN=>10.0.0.1 TTL/HL=64" >> /etc/rc.local
 echo "iptables -F" >> /etc/rc.local
