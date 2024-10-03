@@ -13,7 +13,7 @@ echo "iptables -A FORWARD -i wlan0 -o br-lan -j ACCEPT" >> /etc/rc.local
 echo "iptables -A FORWARD -i br-lan -o wlan0 -j ACCEPT" >> /etc/rc.local
 echo "iptables -P FORWARD ACCEPT" >> /etc/rc.local
 
-echo"Installing ip6tables rule to /etc/rc.local"
+echo "Installing ip6tables rule to /etc/rc.local"
 echo "ip6tables -F" >> /etc/rc.local
 echo "ip6tables -t mangle -F" >> /etc/rc.local
 echo "ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64" >> /etc/rc.local
