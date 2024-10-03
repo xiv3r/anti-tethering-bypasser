@@ -1,6 +1,10 @@
-# Bypassed Wireless Access Point with Anti-Tethering enabled using any Router with OpenWRT installed.
+<h1 align="center"> Bypassed Wireless Access Point with Anti-Tethering enabled using any Router with OpenWRT installed.
 
-### [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html) Overview.
+<h1 align="center">
+  
+  [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html)
+ 
+</h1>
 
 ### Note
    * Requires Internet for installation.
