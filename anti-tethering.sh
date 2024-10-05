@@ -6,7 +6,8 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
 echo "Installing iptables rule to /etc/rc.local"
-echo "#!/bin/sh /etc/rc.local" > /etc/rc.local
+sed -i 's/exit 0//' /etc/rc.local
+echo "#!/bin/sh /etc/rc.local" >> /etc/rc.local
 echo "# WISP 10.0.0.1 TTL/HL=1 -> OpenWRT w/ bypassed -> LAN/WLAN=>10.0.0.1 TTL/HL=64" >> /etc/rc.local
 
 echo "iptables -F" >> /etc/rc.local
