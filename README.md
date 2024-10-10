@@ -36,6 +36,18 @@
     opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh -x
 
 ```bash
+# IPTABLES for IPv4 (recommended)
+# _________________
+
+# Flush all rules in the filter table
+iptables -F
+
+# Flush all rules in the nat table
+iptables -t nat -F
+
+# Flush all rules in the mangle table
+iptables -t mangle -F
+
 # Set TTL for incoming packets (PREROUTING)
 iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 65
 
@@ -48,6 +60,26 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 # Allow forwarding between interfaces (if applicable)
 iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+# IP6TABLES for IPv6 (optional)
+# __________________
+
+# Flush all rules in the filter table
+ip6tables -F
+
+# Flush all rules in the mangle table
+ip6tables -t mangle -F
+
+# Setting TTL for incoming traffic on wlan0
+ip6tables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
+
+# Setting TTL for outgoing traffic on wlan0
+ip6tables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
+
+# Allow forwarding between interfaces (if applicable)
+ip6tables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+ip6tables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
 ```
 
 ### How To check?
@@ -72,10 +104,10 @@ opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/a
 Here is a basic nftables configuration to change TTL and allow forwarding between `wlan0` and `eth0`:
 
 ```bash
-# NFTABLES for IPv4
+# NFTABLES for IPv4 (recommended)
+# _________________
 
 nft add table inet custom_table
-
 # Prerouting: Change TTL=1 to TTL=64 on incoming packets from wlan0
 nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
 nft add rule inet custom_table prerouting iif "wlan0" ip ttl set 64
@@ -90,8 +122,8 @@ nft add chain inet custom_table forward { type filter hook forward priority 0 \;
 nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
 nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 
-# NFTABLE for IPv6
-
+# NFTABLE for IPv6 (optional)
+# ________________
 # Prerouting: Change HL=1 to HL=64 on incoming packets from wlan0
 nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
 nft add rule inet custom_table prerouting iif "wlan0" ip6 hl set 64
