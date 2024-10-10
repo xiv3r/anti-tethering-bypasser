@@ -31,5 +31,3 @@ chmod +x /etc/rc.local
 
 echo "Done Installing iptables and ip6tables rule into /etc/rc.local"
 echo "Reboot the router to apply the setting"
-reboot
-echo "Rebooting...!"
