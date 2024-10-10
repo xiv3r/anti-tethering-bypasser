@@ -56,10 +56,6 @@ opkg update ; opkg install nftables kmod-nft-nat kmod-nft-core kmod-nft-nat kmod
 
 Here is a basic nftables configuration to change TTL and allow forwarding between `wlan0` and `eth0`:
 
-#### 3. Create the nftables rules file
-
-Create or edit the nftables configuration file `/etc/nftables.conf`:
-
 ```bash
 nft add table inet custom_table
 
@@ -78,15 +74,18 @@ nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
 nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 
 ```
+### 3. Create the nftables rules file
+
+Create or edit the nftables configuration file 
+
+    vim /etc/nftables.conf
+
 
 ### 4. **Ensure nftables Service is Enabled**
 
 To ensure nftables starts on boot and the rules persist across reboots, enable and start the nftables service:
 
-```bash
-nano /etc/nftables.conf
-chmod +x /etc/nftables.conf
-```
+    chmod +x /etc/nftables.conf
 
 ### Explanation:
 - **Prerouting chain**: Incoming packets on `wlan0` with TTL=1 are changed to TTL=64 before forwarding.
