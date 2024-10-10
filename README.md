@@ -61,50 +61,22 @@ Here is a basic nftables configuration to change TTL and allow forwarding betwee
 Create or edit the nftables configuration file `/etc/nftables.conf`:
 
 ```bash
-#!/usr/sbin/nft -f
+nft add table inet custom_table
 
-table inet filter {
-    chain input {
-        type filter hook input priority 0; policy accept;
-    }
+# Prerouting: Change TTL on incoming packets from wlan0
+nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
+nft add rule inet custom_table prerouting iif "wlan0" ip ttl set 64
 
-    chain forward {
-        type filter hook forward priority 0; policy drop;
+# Postrouting: Enable masquerading on eth0 and set outgoing TTL for wlan0
+nft add chain inet custom_table postrouting { type nat hook postrouting priority 100 \; }
+nft add rule inet custom_table postrouting oif "eth0" masquerade
+nft add rule inet custom_table postrouting oif "wlan0" ip ttl set 64
 
-        # Allow forwarding between wlan0 and eth0
-        iif "wlan0" oif "eth0" accept
-        iif "eth0" oif "wlan0" accept
-    }
+# Forwarding: Allow traffic between wlan0 and eth0 in both directions
+nft add chain inet custom_table forward { type filter hook forward priority 0 \; }
+nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
+nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 
-    chain output {
-        type filter hook output priority 0; policy accept;
-    }
-}
-
-table ip nat {
-    chain prerouting {
-        type nat hook prerouting priority -100; policy accept;
-
-        # Change incoming TTL=1 to TTL=64 for packets on wlan0
-        iif "wlan0" ip ttl 1 ttl set 64
-    }
-
-    chain postrouting {
-        type nat hook postrouting priority 100; policy accept;
-
-        # Change TTL=64 on outgoing packets to wlan0
-        oif "wlan0" ip ttl set 64
-    }
-}
-```
-
-#### 3.1 Save and apply the nftables rules
-
-After saving the configuration file, apply the rules using the following command:
-
-```bash
-nftable -f /etc/nftables.conf
-chmod +x /etc/nftables.conf
 ```
 
 ### 4. **Ensure nftables Service is Enabled**
@@ -112,8 +84,8 @@ chmod +x /etc/nftables.conf
 To ensure nftables starts on boot and the rules persist across reboots, enable and start the nftables service:
 
 ```bash
-sudo systemctl enable nftables
-sudo systemctl start nftables
+nano /etc/nftables.conf
+chmod +x /etc/nftables.conf
 ```
 
 ### Explanation:
