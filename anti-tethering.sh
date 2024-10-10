@@ -28,6 +28,7 @@ echo "ip6tables -A FORWARD -i br-lan -o wlan0 -j ACCEPT" >> /etc/rc.local
 
 echo "exit 0" >> /etc/rc.local
 chmod +x /etc/rc.local
+sh /etc/rc.local
 
 echo "Done Installing iptables and ip6tables rule into /etc/rc.local"
-echo "Reboot the router to apply the setting"
+echo "iptables and ip6tables is running now on wlan0 to eth0 with ttl=64"
