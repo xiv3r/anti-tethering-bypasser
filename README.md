@@ -35,6 +35,21 @@
    
     opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh
 
+```bash
+# Set TTL for incoming packets (PREROUTING)
+iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 65
+
+# Set TTL for outgoing packets (POSTROUTING)
+iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
+
+# NAT (Masquerading) to route traffic through wlan0 interface
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+# Allow forwarding between interfaces (if applicable)
+iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+```
+
 ### How To check?
    
    * `iptables -vnL --line-numbers`
