@@ -24,5 +24,3 @@ echo "nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept" >> /
 chmod +x /etc/nftables.conf
 echo "Done installing config to /etc/nftables.conf"
 echo "Required router reboot to apply the settings"
-echo "Rebooting...!"
-reboot
