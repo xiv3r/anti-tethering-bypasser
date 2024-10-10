@@ -49,27 +49,14 @@ To achieve the setup where incoming packets with TTL=1 on the `wlan0` interface 
 
 ### 1. **Install nftables (if not installed)**
 ```bash
-sudo apt-get install nftables
+opkg update ; opkg install nftables kmod-nft-nat kmod-nft-core kmod-nft-nat kmod-nfnetlink
 ```
 
-### 2. **Enable forwarding between wlan0 and eth0**
-You must enable IP forwarding on the system.
-
-```bash
-sudo sysctl -w net.ipv4.ip_forward=1
-```
-
-To make this change persistent, edit `/etc/sysctl.conf` and ensure the following line is present:
-
-```bash
-net.ipv4.ip_forward=1
-```
-
-### 3. **Configure the nftables Rules**
+### 2. **Configure the nftables Rules**
 
 Here is a basic nftables configuration to change TTL and allow forwarding between `wlan0` and `eth0`:
 
-#### 3.1 Create the nftables rules file
+#### 3. Create the nftables rules file
 
 Create or edit the nftables configuration file `/etc/nftables.conf`:
 
@@ -111,12 +98,13 @@ table ip nat {
 }
 ```
 
-#### 3.2 Save and apply the nftables rules
+#### 3.1 Save and apply the nftables rules
 
 After saving the configuration file, apply the rules using the following command:
 
 ```bash
-sudo nft -f /etc/nftables.conf
+nftable -f /etc/nftables.conf
+chmod +x /etc/nftables.conf
 ```
 
 ### 4. **Ensure nftables Service is Enabled**
