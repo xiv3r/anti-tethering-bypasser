@@ -1,5 +1,7 @@
 #!/bin/sh
 
+opkg install nftables kmod-nft-nat kmod-nft-core kmod-nft-nat kmod-nfnetlink
+
 echo "adding nftables to /etc/nftables.conf"
 
 echo "#!/bin/sh" > /etc/nftables.conf
