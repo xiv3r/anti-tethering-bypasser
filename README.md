@@ -64,7 +64,7 @@ To achieve the setup where incoming packets with TTL=1 on the `wlan0` interface 
 
 ### 1. ** Auto Install NFTABLES**
 ```bash
-opkg update; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh -x
+opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh -x
 ```
 
 ### 2. **Configure the nftables Rules**
