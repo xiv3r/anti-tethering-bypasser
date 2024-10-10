@@ -33,7 +33,7 @@
 ### Auto install
    * Persistent /etc/rc.local
    
-    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh
+    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh -x
 
 ```bash
 # Set TTL for incoming packets (PREROUTING)
@@ -62,9 +62,9 @@ iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 
 To achieve the setup where incoming packets with TTL=1 on the `wlan0` interface are modified to have TTL=64 and forwarded to the `eth0` interface, and the outgoing packets are modified with TTL=64 when sent back from `eth0` to `wlan0`, you can configure nftables as follows:
 
-### 1. **Install nftables (if not installed)**
+### 1. ** Auto Install NFTABLES**
 ```bash
-opkg update ; opkg install nftables kmod-nft-nat kmod-nft-core kmod-nft-nat kmod-nfnetlink
+opkg update; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh -x
 ```
 
 ### 2. **Configure the nftables Rules**
