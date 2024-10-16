@@ -71,7 +71,7 @@ ip6tables -F
 ip6tables -t mangle -F
 
 # Setting TTL for incoming traffic on wlan0
-ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64
+ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 65
 
 # Setting TTL for outgoing traffic on wlan0
 ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
