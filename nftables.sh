@@ -30,3 +30,4 @@ sh /etc/nftables.conf
 
 echo "Done installing config into /etc/nftables.conf"
 echo "nftables is running now on wlan0 to eth0 with ttl=64"
+nftables list ruleset
