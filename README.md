@@ -117,20 +117,24 @@ nft add chain inet custom_table forward { type filter hook forward priority 0 \;
 nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
 nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 ```
-### 3. Create the nftables rules file
+# 3. Create the nftables rules file
 
 Create or edit the nftables configuration file 
 
     vim /etc/nftables.conf
 
 
-### 4. **Ensure nftables Service is Enabled**
+# 4. **Ensure nftables Service is Enabled**
 
 To ensure nftables starts on boot and the rules persist across reboots, enable and start the nftables service:
 
     chmod +x /etc/nftables.conf
 
-### Explanation:
+# 5. Check nftables existing ruleset
+
+    nftables list ruleset
+
+# Explanation:
 - **Prerouting chain**: Incoming packets on `wlan0` with TTL=1 are changed to TTL=64 before forwarding.
 - **Postrouting chain**: Outgoing packets through `wlan0` are set to TTL=64.
 - **Forward chain**: Allows forwarding between `wlan0` and `eth0` in both directions.
