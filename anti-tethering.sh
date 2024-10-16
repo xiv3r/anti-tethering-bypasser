@@ -29,3 +29,5 @@ sh /etc/rc.local
 
 echo "Done Installing iptables and ip6tables rule into /etc/rc.local"
 echo "iptables and ip6tables is running now on wlan0 to eth0 with ttl=64"
+iptables -vnL --line-numbers
+ip6tables -vnL --line-numbers
