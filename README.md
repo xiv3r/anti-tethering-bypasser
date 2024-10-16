@@ -31,7 +31,7 @@
 <h1 align="center"> Using IPTABLES & IP6TABLES </h1>
      
 ### Auto install
-   * Persistent /etc/rc.local
+   * Persist /etc/rc.local
    
     opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh -x
 
@@ -58,8 +58,8 @@ iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 # Allow forwarding between interfaces (if applicable)
-iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 
 # IP6TABLES for IPv6 (optional)
 # _____________________________
@@ -105,7 +105,7 @@ Here is a basic nftables configuration to change TTL and allow forwarding betwee
 nft add table inet custom_table
 # Prerouting: Change TTL=1 to TTL=64 on incoming packets from wlan0
 nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
-nft add rule inet custom_table prerouting iif "wlan0" ip ttl set 64
+nft add rule inet custom_table prerouting iif "wlan0" ip ttl set 65
 
 # Postrouting: Enable masquerading on eth0 and set outgoing TTL for wlan0
 nft add chain inet custom_table postrouting { type nat hook postrouting priority 100 \; }
