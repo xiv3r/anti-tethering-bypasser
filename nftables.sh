@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Downloading dependencies"
-opkg install nftables kmod-nft-nat kmod-nft-core kmod-nft-nat kmod-nfnetlink
+opkg install nftables kmod-nft-nat kmod-nft-core kmod-nfnetlink
 
 echo "adding nftables to /etc/nftables.conf"
 
@@ -30,12 +30,12 @@ echo "nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept" >> /
 
 # Prerouting: Change HL=1 to HL=64 on incoming packets from wlan0
 # nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
-echo "nft add rule inet custom_table prerouting iif "wlan0" ip6 hl set 65" >> /etc/nftables.conf
+# echo "nft add rule inet custom_table prerouting iif "wlan0" ip6 hl set 65" >> /etc/nftables.conf
 
 # Postrouting: Enable masquerading on eth0 and set outgoing HL for wlan0
 # nft add chain inet custom_table postrouting { type nat hook postrouting priority 100 \; }
 # nft add rule inet custom_table postrouting oif "eth0" masquerade
-echo "nft add rule inet custom_table postrouting oif "wlan0" ip6 hl set 64" >> /etc/nftables.conf
+# echo "nft add rule inet custom_table postrouting oif "wlan0" ip6 hl set 64" >> /etc/nftables.conf
 
 # Forwarding: Allow traffic between wlan0 and eth0 in both directions
 # nft add chain inet custom_table forward { type filter hook forward priority 0 \; }
