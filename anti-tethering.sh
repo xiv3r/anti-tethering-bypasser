@@ -1,5 +1,5 @@
 echo "Downloading Dependencies"
-opkg install iptables-mod-ipopt kmod-ipt-ipopt kmod-ipt-nat iptables-zz-legacy iptables ip6tables ip6tables-zz-legacy ip6tables-mod-nat kmod-ipt-nat6 kmod-ip6tables kmod-zram
+opkg install iptables-zz-legacy iptables ip6tables ip6tables-zz-legacy
 
 echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
