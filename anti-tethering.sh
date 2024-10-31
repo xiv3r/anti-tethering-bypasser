@@ -15,10 +15,10 @@ echo "iptables -t mangle -F" >> /etc/rc.local
 echo "iptables -t nat -F" >> /etc/rc.local
 echo "ip6tables -F" >> /etc/rc.local
 echo "ip6tables -t mangle -F" >> /etc/rc.local
-echo "iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 65" >> /etc/rc.local
+echo "iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64" >> /etc/rc.local
 echo "iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64" >> /etc/rc.local
 echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /etc/rc.local
-echo "ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 65" >> /etc/rc.local
+echo "ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64" >> /etc/rc.local
 echo "ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64" >> /etc/rc.local
 echo "iptables -A FORWARD -i wlan0 -o br-lan -j ACCEPT" >> /etc/rc.local
 echo "iptables -A FORWARD -i br-lan -o wlan0 -j ACCEPT" >> /etc/rc.local
