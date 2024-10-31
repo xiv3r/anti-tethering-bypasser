@@ -31,11 +31,11 @@
 <h1 align="center"> Using IPTABLES & IP6TABLES </h1>
      
 ### Auto install
-   * Persist /etc/rc.local
+`/etc/rc.local`
    
     opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
 
-```bash
+```sh
 # IPTABLES for IPv4 (recommended)
 # _______________________________
 
@@ -60,7 +60,8 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 # Allow forwarding between interfaces (if applicable)
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
-
+```
+```sh
 # IP6TABLES for IPv6 (optional)
 # _____________________________
 
