@@ -100,7 +100,7 @@ telnet 192.168.1.1
 
 ## Install Dependencies 
 ```sh
-opkg update && opkg install iptables iptables-mod-iopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
+opkg update && opkg install iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
 ```
 
 # Using nftables.conf (optional)
@@ -141,6 +141,8 @@ chain mangle_postrouting_ttl65 {
 }
 ```
 - Install Nftables.nft
+```sh
+opkg update && opkg install curl && cd /etc/nftables.d && wget https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/12-mangle-ttl-65.nft && 
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
 # Check nftables existing ruleset
