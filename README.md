@@ -98,10 +98,9 @@ opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/a
 
 Here is a basic nftables configuration to change TTL and allow forwarding between `wlan0` and `eth0`:
 
-```bash
-# NFTABLES for IPv4 (recommended)
-# _______________________________
-
+# Using nftables.conf (optional)
+```sh
+# NFTABLES for IPv4 only
 nft add table inet custom_table
 # Prerouting: Change TTL=1 to TTL=64 on incoming packets from wlan0
 nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
@@ -117,6 +116,21 @@ nft add chain inet custom_table forward { type filter hook forward priority 0 \;
 nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
 nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 ```
+# Using nftables.nft (recommended)
+```sh
+chain mangle_prerouting_ttl65 {
+  type filter hook prerouting priority 300; policy accept;
+  iifname "eth0" counter ip ttl set 65
+  iifname "eth0" counter ip6 hoplimit set 65
+}
+
+chain mangle_postrouting_ttl65 {
+  type filter hook postrouting priority 300; policy accept;
+  oifname "eth0" counter ip ttl set 65
+  oifname "eth0" counter ip6 hoplimit set 65
+}
+```
+
 # 3. Create the nftables rules file
 
 Create or edit the nftables configuration file 
