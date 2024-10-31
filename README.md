@@ -52,7 +52,7 @@ iptables -t mangle -F
 iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 65
 
 # Set TTL for outgoing packets (POSTROUTING)
-iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
+iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 65
 
 # NAT (Masquerading) to route traffic through wlan0 interface
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -74,7 +74,7 @@ ip6tables -t mangle -F
 ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 65
 
 # Setting TTL for outgoing traffic on wlan0
-ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
+ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 65
 ```
 
 ### How To check?
@@ -89,10 +89,18 @@ ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
 
 To achieve the setup where incoming packets with TTL=1 on the `wlan0` interface are modified to have TTL=64 and forwarded to the `eth0` interface, and the outgoing packets are modified with TTL=64 when sent back from `eth0` to `wlan0`, you can configure nftables as follows:
 
-# ** Auto Install NFTABLES.conf**
-## Dependencies 
+# Getting root access via SSH
 ```sh
-opkg update && opkg install nftables
+ssh root@192.168.1.1
+```
+# Getting root access via Telnet
+```sh
+telnet 192.168.1.1
+```
+
+## Install Dependencies 
+```sh
+opkg update && opkg install iptables iptables-mod-iopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
 ```
 
 # Using nftables.conf (optional)
