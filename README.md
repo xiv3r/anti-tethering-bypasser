@@ -132,10 +132,12 @@ chain mangle_postrouting_ttl65 {
   oifname "wlan0" counter ip6 hoplimit set 65
 }
 ```
+- Install Nftables.nft
+<img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
 # Check nftables existing ruleset
 ```sh
-fw4 check && nftables list ruleset
+fw4 check && nft list ruleset
 ```
 # Explanation:
 - **Prerouting chain**: Incoming packets on `wlan0` with TTL=1 are changed to TTL=64 before forwarding.
