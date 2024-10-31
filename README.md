@@ -33,7 +33,7 @@
 ### Auto install
    * Persist /etc/rc.local
    
-    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/anti-tethering.sh | sh
+    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
 
 ```bash
 # IPTABLES for IPv4 (recommended)
