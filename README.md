@@ -89,14 +89,11 @@ ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
 
 To achieve the setup where incoming packets with TTL=1 on the `wlan0` interface are modified to have TTL=64 and forwarded to the `eth0` interface, and the outgoing packets are modified with TTL=64 when sent back from `eth0` to `wlan0`, you can configure nftables as follows:
 
-### 1. ** Auto Install NFTABLES**
-```bash
-opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh -x
+# ** Auto Install NFTABLES.conf**
+## Dependencies 
+```sh
+opkg update && opkg install nftables
 ```
-
-### 2. **Configure the nftables Rules**
-
-Here is a basic nftables configuration to change TTL and allow forwarding between `wlan0` and `eth0`:
 
 # Using nftables.conf (optional)
 ```sh
@@ -116,38 +113,30 @@ nft add chain inet custom_table forward { type filter hook forward priority 0 \;
 nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
 nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 ```
+- Nftables.conf installation
+```sh
+opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh
+```
+
 # Using nftables.nft (recommended)
 ```sh
 chain mangle_prerouting_ttl65 {
   type filter hook prerouting priority 300; policy accept;
-  iifname "eth0" counter ip ttl set 65
-  iifname "eth0" counter ip6 hoplimit set 65
+  iifname "wlan0" counter ip ttl set 65
+  iifname "wlan0" counter ip6 hoplimit set 65
 }
 
 chain mangle_postrouting_ttl65 {
   type filter hook postrouting priority 300; policy accept;
-  oifname "eth0" counter ip ttl set 65
-  oifname "eth0" counter ip6 hoplimit set 65
+  oifname "wlan0" counter ip ttl set 65
+  oifname "wlan0" counter ip6 hoplimit set 65
 }
 ```
 
-# 3. Create the nftables rules file
-
-Create or edit the nftables configuration file 
-
-    vim /etc/nftables.conf
-
-
-# 4. **Ensure nftables Service is Enabled**
-
-To ensure nftables starts on boot and the rules persist across reboots, enable and start the nftables service:
-
-    chmod +x /etc/nftables.conf
-
-# 5. Check nftables existing ruleset
-
-    nftables list ruleset
-
+# Check nftables existing ruleset
+```sh
+fw4 check && nftables list ruleset
+```
 # Explanation:
 - **Prerouting chain**: Incoming packets on `wlan0` with TTL=1 are changed to TTL=64 before forwarding.
 - **Postrouting chain**: Outgoing packets through `wlan0` are set to TTL=64.
