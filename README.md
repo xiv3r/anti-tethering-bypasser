@@ -130,7 +130,7 @@ opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/a
 ```
 
 # Using nftables.nft (recommended)
-`etc/nftables.d/`
+`etc/nftables.d/12-mangle-ttl-65.nft`
 ```sh
 chain mangle_prerouting_ttl65 {
   type filter hook prerouting priority 300; policy accept;
@@ -146,7 +146,7 @@ chain mangle_postrouting_ttl65 {
 ```
 - ## Install Nftables.nft
 ```sh
-cd /etc/nftables.d/ && wget https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/12-mangle-ttl-65.nft && fw4 check && /etc/init.d/firewall restart
+cd /etc/nftables.d/ && wget https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/12-mangle-ttl-65.nft && chmod +x /etc/nftables.d/12-mangle-ttl-65.nft && fw4 check && /etc/init.d/firewall restart
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
