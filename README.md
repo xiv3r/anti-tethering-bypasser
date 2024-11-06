@@ -32,9 +32,9 @@
      
 ### Auto install
 `/etc/rc.local`
-   
-    opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
-
+```sh
+opkg update wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
+```
 ```sh
 # IPTABLES for IPv4 (recommended)
 # _______________________________
@@ -101,7 +101,7 @@ telnet 192.168.1.1
 
 ## Install Dependencies 
 ```sh
-opkg update && opkg install curl wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
+opkg update && opkg install wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
 ```
 
 # Using nftables.conf (optional)
@@ -126,7 +126,7 @@ nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
 ```
 - ## Install Nftables.conf
 ```sh
-opkg update ; opkg install curl ; curl https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh
+opkg update ; wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh
 ```
 
 # Using nftables.nft (recommended)
@@ -146,7 +146,7 @@ chain mangle_postrouting_ttl65 {
 ```
 - ## Install Nftables.nft
 ```sh
-cd /etc/nftables.d/ && wget https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.nft && chmod +x /etc/nftables.d/ttl64.nft && fw4 check && /etc/init.d/firewall restart
+wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.nft && chmod +x /etc/nftables.d/ttl64.sh
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
