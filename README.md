@@ -146,7 +146,7 @@ chain mangle_postrouting_ttl65 {
 ```
 - ## Install Nftables.nft
 ```sh
-wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.nft && chmod +x /etc/nftables.d/ttl64.sh
+wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.nft && chmod +x /etc/nftables.d/ttl64.sh | sh
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
