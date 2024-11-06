@@ -7,8 +7,5 @@ chain mangle_prerouting_ttl64 {
   counter ip6 hoplimit set 64
 }
 " > /etc/nftables.d/ttl64.nft
-
 ###
-fw4 check
-###
-/etc/init.d/firewall restart
+fw4 check && /etc/init.d/firewall restart
