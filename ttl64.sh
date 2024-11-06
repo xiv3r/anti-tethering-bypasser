@@ -1,5 +1,4 @@
 #!/bin/sh
-
 echo "
 chain mangle_prerouting_ttl64 {
   type filter hook prerouting priority 300; policy accept;
