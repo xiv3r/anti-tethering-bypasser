@@ -10,22 +10,20 @@ net.ipv4.ip_forward=1
 ###
 sysctl -p
 
-echo "Installing iptables rule to /etc/rc.local"
-sed -i 's/exit 0//' /etc/rc.local
+echo "Installing iptables rule to /etc/iptables/rules.v4"
+sed -i 's/exit 0//' /etc/iptables/rules.v4
 ###
 echo "
-#!/bin/sh /etc/rc.local
+#!/bin/sh
 iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip6tables -t mangle -A PREROUTING -j HL --hl-set 64
-iptables -A FORWARD -i wlan0 -o br-lan -j ACCEPT
-iptables -A FORWARD -i br-lan -o wlan0 -j ACCEPT
 exit 0
-" >> /etc/rc.local
+" >> /etc/iptables/rules.v4
 ##$
-chmod +x /etc/rc.local
+chmod +x /etc/iptables/rules.v4
 ###
-sh /etc/rc.local
+sh /etc/iptables/rules.v4
 echo "Done Installing"
 ###
 iptables -vnL --line-numbers
