@@ -4,10 +4,7 @@ echo "Downloading Dependencies"
 ###
 opkg install iptables-mod-ipopt iptables-zz-legacy ip6tables-zz-legacy
 ###
-echo "
-net.ipv6.conf.all.forwarding=1
-net.ipv4.ip_forward=1
-" >> /etc/sysctl.conf
+wget -O /etc/sysctl.conf https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/sysctl
 ###
 sysctl -p
 ###
