@@ -104,33 +104,8 @@ telnet 192.168.1.1
 opkg update && opkg install wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
 ```
 
-# Using nftables.conf (optional)
-```sh
-# NFTABLES for IPv4 only
-# /etc/nftables.conf
-
-nft add table inet custom_table
-# Prerouting: Change TTL=1 to TTL=64 on incoming packets from wlan0
-nft add chain inet custom_table prerouting { type filter hook prerouting priority 0 \; }
-nft add rule inet custom_table prerouting iif "wlan0" ip ttl set 65
-
-# Postrouting: Enable masquerading on eth0 and set outgoing TTL for wlan0
-nft add chain inet custom_table postrouting { type nat hook postrouting priority 100 \; }
-nft add rule inet custom_table postrouting oif "eth0" masquerade
-nft add rule inet custom_table postrouting oif "wlan0" ip ttl set 64
-
-# Forwarding: Allow traffic between wlan0 and eth0 in both directions
-nft add chain inet custom_table forward { type filter hook forward priority 0 \; }
-nft add rule inet custom_table forward iif "wlan0" oif "eth0" accept
-nft add rule inet custom_table forward iif "eth0" oif "wlan0" accept
-```
-- ## Install Nftables.conf
-```sh
-opkg update ; wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/nftables.sh | sh
-```
-
 # Using nftables.nft (recommended)
-`etc/nftables.d/ttl64.nft`
+`/etc/nftables.d/ttl64.nft`
 ```sh
 chain mangle_prerouting_ttl64 {
   type filter hook prerouting priority 300; policy accept;
@@ -140,7 +115,7 @@ chain mangle_prerouting_ttl64 {
 ```
 - ## Install Nftables.nft
 ```
-wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.sh | sh
+wget -O /etc/nftables.d/ttl64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.sh && fw4 check && /etc/nftables.d/firewall restart
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
