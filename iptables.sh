@@ -2,10 +2,6 @@
 
 opkg install iptables-mod-ipopt iptables-zz-legacy ip6tables-zz-legacy
 ###
-wget -O /etc/sysctl.conf https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/sysctl
-###
-sysctl -p
-###
 cat >/etc/iptables/rules.v4 << EOF
 iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
