@@ -130,18 +130,12 @@ opkg update ; wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-b
 ```
 
 # Using nftables.nft (recommended)
-`etc/nftables.d/12-mangle-ttl-65.nft`
+`etc/nftables.d/ttl64.nft`
 ```sh
-chain mangle_prerouting_ttl65 {
+chain mangle_prerouting_ttl64 {
   type filter hook prerouting priority 300; policy accept;
-  iifname "wlan0" counter ip ttl set 65
-  iifname "wlan0" counter ip6 hoplimit set 65
-}
-
-chain mangle_postrouting_ttl65 {
-  type filter hook postrouting priority 300; policy accept;
-  oifname "wlan0" counter ip ttl set 65
-  oifname "wlan0" counter ip6 hoplimit set 65
+  counter ip ttl set 64
+  counter ip6 hoplimit set 64
 }
 ```
 - ## Install Nftables.nft
