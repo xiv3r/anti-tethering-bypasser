@@ -7,7 +7,7 @@ iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip6tables -t mangle -A PREROUTING -j HL --hl-set 64
 EOF
-##$
+###
 chmod +x /etc/iptables/rules.v4
 ###
 sh /etc/iptables/rules.v4
