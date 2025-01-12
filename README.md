@@ -1,4 +1,4 @@
-<h1 align="center"> Bypassed Wireless Access Point with Anti-Tethering enabled using any Router with OpenWRT installed.
+<h1 align="center"> Bypass Wireless Access Point with Tethering Restrictions using any OpenWRT Router 
 
 <h1 align="center">
   
