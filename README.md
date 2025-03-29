@@ -1,6 +1,7 @@
 <h1 align="center"> Bypass Wireless Access Point with Tethering Restrictions using any OpenWRT Router 
 
 <h1 align="center">
+  TTL=1 to TTL=64
   
   [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html)
  
@@ -19,10 +20,7 @@
    - Execute `SSH` or `TELNET` using `Putty`•`Termius`•`Termux`•`JuiceSSH`•`Kali/Ubuntu` and then proceed to auto install.
     `sudo apt update ; apt install ssh telnet puty -y`
 
-    ssh root@192.168.1.1
-  
-   <br>
-   
+    ssh root@192.168.1.1  
     telnet 192.168.1.1
   
    * Username: `root`
@@ -33,29 +31,20 @@
 ### Auto install
 `/etc/rc.local`
 ```sh
-opkg update wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
+opkg update && opkg install bash wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | bash
 ```
 ```sh
 # IPTABLES for IPv4 (recommended)
-# _______________________________
-
-# Flush all rules in the filter table
-iptables -F
-
-# Flush all rules in the nat table
-iptables -t nat -F
+# ______________________________
 
 # Flush all rules in the mangle table
 iptables -t mangle -F
 
 # Set TTL for incoming packets (PREROUTING)
-iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 65
+iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
 
 # Set TTL for outgoing packets (POSTROUTING)
-iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 65
-
-# NAT (Masquerading) to route traffic through wlan0 interface
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
 
 # Allow forwarding between interfaces (if applicable)
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
@@ -65,17 +54,14 @@ iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 # IP6TABLES for IPv6 (optional)
 # _____________________________
 
-# Flush all rules in the filter table
-ip6tables -F
-
 # Flush all rules in the mangle table
 ip6tables -t mangle -F
 
 # Setting TTL for incoming traffic on wlan0
-ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 65
+ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64
 
 # Setting TTL for outgoing traffic on wlan0
-ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 65
+ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
 ```
 
 ### How To check?
@@ -101,7 +87,7 @@ telnet 192.168.1.1
 
 ## Install Dependencies 
 ```sh
-opkg update && opkg install wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
+opkg update && opkg install bash wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
 ```
 
 # Using nftables.nft (recommended)
