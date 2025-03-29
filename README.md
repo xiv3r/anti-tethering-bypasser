@@ -81,12 +81,12 @@ opkg update && opkg install bash wget
 ```
 
 # Using nftables.nft (recommended)
-`/etc/nftables.d/ttl64.nft`
+`vi /etc/nftables.d/ttl64.nft`
 ```sh
 chain mangle_prerouting_ttl64 {
   type filter hook prerouting priority 300; policy accept;
-  counter ip ttl set 64
-  counter ip6 hoplimit set 64
+  ip ttl set 64
+  ip6 hoplimit set 64
 }
 ```
 - ## Install Nftables.nft
