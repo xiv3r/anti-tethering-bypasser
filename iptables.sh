@@ -4,6 +4,7 @@ opkg install bash iptables-mod-ipopt iptables-zz-legacy ip6tables-zz-legacy
 ###
 cat >/etc/iptables/rules.v4 << EOF
 iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
+iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
 ip6tables -t mangle -A PREROUTING -j HL --hl-set 64
 EOF
 ###
