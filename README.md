@@ -42,13 +42,6 @@ iptables -t mangle -F
 
 # Set TTL for incoming packets (PREROUTING)
 iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
-
-# Set TTL for outgoing packets (POSTROUTING)
-iptables -t mangle -A POSTROUTING -o wlan0 -j TTL --ttl-set 64
-
-# Allow forwarding between interfaces (if applicable)
-iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 ```
 ```sh
 # IP6TABLES for IPv6 (optional)
@@ -59,9 +52,6 @@ ip6tables -t mangle -F
 
 # Setting TTL for incoming traffic on wlan0
 ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64
-
-# Setting TTL for outgoing traffic on wlan0
-ip6tables -t mangle -A POSTROUTING -o wlan0 -j HL --hl-set 64
 ```
 
 ### How To check?
