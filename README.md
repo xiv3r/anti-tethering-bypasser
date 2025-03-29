@@ -87,7 +87,7 @@ telnet 192.168.1.1
 
 ## Install Dependencies 
 ```sh
-opkg update && opkg install bash wget iptables iptables-mod-ipopt iptables-zz-legacy ip6tables ip6tables-zz-legacy nftables
+opkg update && opkg install bash wget
 ```
 
 # Using nftables.nft (recommended)
