@@ -31,7 +31,7 @@
 ### Auto install
 `/etc/rc.local`
 ```sh
-opkg update && opkg install bash wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | bash
+opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | bash
 ```
 ```sh
 # IPTABLES for IPv4 (recommended)
@@ -41,7 +41,7 @@ opkg update && opkg install bash wget && wget -qO- https://raw.githubusercontent
 iptables -t mangle -F
 
 # Set TTL for incoming packets (PREROUTING)
-iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
+iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 ```
 ```sh
 # IP6TABLES for IPv6 (optional)
@@ -51,7 +51,7 @@ iptables -t mangle -A PREROUTING -i wlan0 -j TTL --ttl-set 64
 ip6tables -t mangle -F
 
 # Setting TTL for incoming traffic on wlan0
-ip6tables -t mangle -A PREROUTING -i wlan0 -j HL --hl-set 64
+ip6tables -t mangle -A PREROUTING -j HL --hl-set 64
 ```
 
 ### How To check?
