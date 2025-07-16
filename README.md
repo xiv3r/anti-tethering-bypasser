@@ -1,18 +1,11 @@
-<h1 align="center"> Bypass Wireless Access Point with Tethering Restrictions using any OpenWRT Router 
-
-<h1 align="center">
-  TTL=1 to TTL=64
-  
-  [--ttl-set=64 / --ttl-inc=1](https://www.linuxtopia.org/Linux_Firewall_iptables/x4799.html)
- 
-</h1>
+# Bypass WiFi Tethering Restrictions using any OpenWRT Router.
 
 ### Note
-   * Requires Internet for installation.
+   * Internet is required for installation.
    * Configure OpenWRT as wireless extender `Network` => `Scan` => Select `Access Point` and save.
 
-### How it works on WISP mode?
-   * WISP 10.0.0.1 TTL/HL=1 => OpenWRT w/ bypasser => 10.0.0.1 TTL/HL=64.
+### How it works on repeater mode?
+   * WISP 10.0.0.1 TTL/HL=1 => OpenWRT w/ bypass => 10.0.0.1 TTL/HL=64.
    
 ### How to do it?
    - First connect the lan cable into the router wan port.
