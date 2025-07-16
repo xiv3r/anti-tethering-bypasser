@@ -1,17 +1,20 @@
 # Bypass WiFi Tethering Restrictions using any OpenWRT Router.
 
-### Note
+# Requirements 
+- Openwrt version 22.03.5/6/7
+
+# Note
    * Internet is required for installation.
    * Configure OpenWRT as wireless extender `Network` => `Scan` => Select `Access Point` and save.
 
-### How it works on repeater mode?
+# How it works on repeater mode?
    * WISP 10.0.0.1 TTL/HL=1 => OpenWRT w/ bypass => 10.0.0.1 TTL/HL=64.
    
-### How to do it?
+# How to do it?
    - First connect the lan cable into the router wan port.
    - Connect your phone via wifi or pc to lan.
    - Execute `SSH` or `TELNET` using `Putty`•`Termius`•`Termux`•`JuiceSSH`•`Kali/Ubuntu` and then proceed to auto install.
-    `sudo apt update ; apt install ssh telnet puty -y`
+    `sudo apt update && sudo apt install ssh telnet puty -y`
 
     ssh root@192.168.1.1  
     telnet 192.168.1.1
