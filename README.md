@@ -41,7 +41,7 @@ opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/
 iptables -t mangle -F
 
 # Set TTL for incoming packets (PREROUTING)
-iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
+iptables -t mangle -I PREROUTING -j TTL --ttl-set 64
 ```
 ```sh
 # IP6TABLES for IPv6 (optional)
@@ -51,7 +51,7 @@ iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 ip6tables -t mangle -F
 
 # Setting TTL for incoming traffic on wlan0
-ip6tables -t mangle -A PREROUTING -j HL --hl-set 64
+ip6tables -t mangle -I PREROUTING -j HL --hl-set 64
 ```
 
 ### How To check?
