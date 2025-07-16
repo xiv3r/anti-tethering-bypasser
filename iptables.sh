@@ -13,6 +13,6 @@ bash /etc/iptables/rules.v4
 ###
 echo "Done Installing"
 ###
-iptables -vnL --line-numbers
+iptables-legacy -Lvn --line-numbers
 ###
-ip6tables -vnL --line-numbers
+ip6tables-legacy -Lvn --line-numbers
