@@ -30,28 +30,28 @@ opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/
 # IPTABLES for IPv4 (recommended)
 # ______________________________
 
-# Flush all rules in the mangle table
-iptables -t mangle -F
+# Flush the rules in the mangle prerouting table
+iptables -t mangle -D PREROUTING
 
-# Set TTL for incoming packets (PREROUTING)
+# Set TTL for incoming packets
 iptables -t mangle -I PREROUTING -j TTL --ttl-set 64
 ```
 ```sh
 # IP6TABLES for IPv6 (optional)
 # _____________________________
 
-# Flush all rules in the mangle table
-ip6tables -t mangle -F
+# Flush the rules in the mangle prerouting table
+ip6tables -t mangle -D PREROUTING
 
-# Setting TTL for incoming traffic on wlan0
+# Setting TTL for incoming packets
 ip6tables -t mangle -I PREROUTING -j HL --hl-set 64
 ```
 
 ### How To check?
    
-   * `iptables -vnL --line-numbers`
-   * `ip6tables -vnL --line-numbers`
-   * `iptables -vnL --line-numbers ; ip6tables -vnL --line-numbers`
+`iptables-legacy -vnL --line-numbers`
+`ip6tables-legacy -Lvn --line-numbers`
+`iptables-legacy -vnL --line-numbers ; ip6tables -vnL --line-numbers`
      
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Without TTL %26 With TTL.png">
 
@@ -68,7 +68,7 @@ ssh root@192.168.1.1
 telnet 192.168.1.1
 ```
 
-## Install Dependencies 
+# Dependencies 
 ```sh
 opkg update && opkg install bash wget
 ```
@@ -81,26 +81,14 @@ chain mangle_prerouting_ttl64 {
                 ip ttl set 64
                 ip6 hoplimit set 64
         }
-
-chain mangle_postrouting_ttl64 {
-                type filter hook postrouting priority 300; policy accept;
-                ip ttl set 64
-                ip6 hoplimit set 64
-        }
 ```
-- ## Install Nftables.nft
+# Install Nftables.nft
 ```
 wget -O /etc/nftables.d/ttl64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.sh && fw4 check && /etc/nftables.d/firewall restart
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
-## Check nftables existing ruleset
+# Check nftables ruleset
 ```sh
 fw4 check && nft list ruleset
 ```
-# Explanation:
-- **Prerouting chain**: Incoming packets on `wlan0` with TTL=1 are changed to TTL=64 before forwarding.
-- **Postrouting chain**: Outgoing packets through `wlan0` are set to TTL=64.
-- **Forward chain**: Allows forwarding between `wlan0` and `eth0` in both directions.
-
-This configuration should modify the TTL values as requested and enable forwarding between the interfaces.
