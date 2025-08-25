@@ -1,7 +1,7 @@
 # Bypass WiFi Tethering Restrictions using any OpenWRT Router.
 
 # Requirements 
-- Openwrt version 22.03.5/6/7
+- Openwrt Router
 
 # Note
    * Internet is required for installation.
@@ -24,36 +24,27 @@
 
 <h1 align="center"> Using IPTABLES & IP6TABLES </h1>
      
-### Auto install
+### Auto install Iptables (optional)
 `/etc/rc.local`
 ```sh
-opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | bash
+opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
+```
+### Iptables config
+```sh
+# IPTABLES
+# Setting ipv4 TTL to 64 for incoming packets
+iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 ```
 ```sh
-# IPTABLES for IPv4 (recommended)
-# ______________________________
-
-# Flush the rules in the mangle prerouting table
-iptables -t mangle -D PREROUTING
-
-# Set TTL for incoming packets
-iptables -t mangle -I PREROUTING -j TTL --ttl-set 64
-```
-```sh
-# IP6TABLES for IPv6 (optional)
-# _____________________________
-
-# Flush the rules in the mangle prerouting table
-ip6tables -t mangle -D PREROUTING
-
-# Setting TTL for incoming packets
+# IP6TABLES
+# Setting ipv6 TTL 64 for incoming packets
 ip6tables -t mangle -I PREROUTING -j HL --hl-set 64
 ```
 
 ### How To check?
    
-`iptables-legacy -vnL --line-numbers`
-`ip6tables-legacy -Lvn --line-numbers`
+`iptables-legacy -L -v -n --line-numbers`
+`ip6tables-legacy -L -v -n --line-numbers`
 `iptables-legacy -vnL --line-numbers ; ip6tables -vnL --line-numbers`
      
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Without TTL %26 With TTL.png">
@@ -73,11 +64,11 @@ telnet 192.168.1.1
 
 # Dependencies 
 ```sh
-opkg update && opkg install bash wget
+opkg update && opkg install wget
 ```
 
-# Using nftables.nft (recommended)
-`vi /etc/nftables.d/ttl64.nft`
+# Nftables config
+`vi /etc/nftables.d/ttl-64.nft`
 ```sh
 chain mangle_prerouting_ttl64 {
                 type filter hook prerouting priority 300; policy accept;
@@ -85,9 +76,9 @@ chain mangle_prerouting_ttl64 {
                 ip6 hoplimit set 64
         }
 ```
-# Install Nftables.nft
+# Auto Install Nftables (recommended)
 ```
-wget -O /etc/nftables.d/ttl64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl64.sh && fw4 check && /etc/nftables.d/firewall restart
+wget -O /etc/nftables.d/ttl-64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl-64.sh && fw4 check && /etc/nftables.d/firewall restart
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
