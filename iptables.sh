@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 opkg install iptables-mod-ipopt iptables-zz-legacy ip6tables-zz-legacy
 ###
