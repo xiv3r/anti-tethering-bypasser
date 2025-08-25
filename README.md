@@ -24,12 +24,12 @@
 
 <h1 align="center"> Using IPTABLES & IP6TABLES </h1>
      
-### Auto install Iptables (optional)
+# Auto install Iptables (optional)
 `/etc/rc.local`
 ```sh
 opkg update && opkg install wget && wget -qO- https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/iptables.sh | sh
 ```
-### Iptables config
+# Iptables config
 ```sh
 # IPTABLES
 # Setting ipv4 TTL to 64 for incoming packets
@@ -41,10 +41,12 @@ iptables -t mangle -A PREROUTING -j TTL --ttl-set 64
 ip6tables -t mangle -I PREROUTING -j HL --hl-set 64
 ```
 
-### How To check?
+# How To check?
    
 `iptables-legacy -L -v -n --line-numbers`
+>
 `ip6tables-legacy -L -v -n --line-numbers`
+>
 `iptables-legacy -vnL --line-numbers ; ip6tables -vnL --line-numbers`
      
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Without TTL %26 With TTL.png">
