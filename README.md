@@ -78,7 +78,7 @@ chain mangle_prerouting_ttl64 {
 ```
 # Auto Install Nftables (recommended)
 ```
-wget -O /etc/nftables.d/ttl-64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl-64.sh && fw4 check && /etc/nftables.d/firewall restart
+wget -O /etc/nftables.d/ttl-64.nft https://raw.githubusercontent.com/xiv3r/anti-tethering-bypasser/refs/heads/main/ttl-64.nft && fw4 check && /etc/nftables.d/firewall restart
 ```
 <img src="https://github.com/xiv3r/anti-tethering-bypasser/blob/main/Nftables.nft.png">
 
