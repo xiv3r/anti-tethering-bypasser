@@ -10,6 +10,6 @@ iptables -t mangle -I PREROUTING 2 -s "$IP" -j RETURN
 iptables -I FORWARD 1 -m mac --mac-source "$MAC" -j ACCEPT
 iptables -I FORWARD 2 -d "$IP" -j ACCEPT
 
-# TTL adjust
-iptables -t mangle -I PREROUTING 1 -s "$IP" -j TTL --ttl-set 64
-iptables -t mangle -I POSTROUTING 1 -d "$IP" -j TTL --ttl-set 64
+# TTL adjust bypass 
+iptables -t mangle -I POSTROUTING 1 -s "$IP" -o eth0.22 -j TTL --ttl-set 64
+iptables -t mangle -I POSTROUTING 1 -d "$IP" -o eth0.22 -j TTL --ttl-set 64
